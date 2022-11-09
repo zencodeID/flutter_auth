@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "59355974152",
+    "project_id": "sanber-auth-20c1a",
+    "storage_bucket": "sanber-auth-20c1a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59355974152:android:e3f279b41a962da4625fbd",
+        "android_client_info": {
+          "package_name": "com.zencode.sanber_auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "59355974152-027hcp9ftha6age22a32qdvfj3735s89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zencode.sanber_auth",
+            "certificate_hash": "2bf1493310577ce43be1dc2c3e56b1f3f2faa7c3"
+          }
+        },
+        {
+          "client_id": "59355974152-6nhiikjqrckreh2e3scoddsgemmd109v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLi_0a0mOUI2pgCZhgBh8XA6XMGBxrYys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "59355974152-6nhiikjqrckreh2e3scoddsgemmd109v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
