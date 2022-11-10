@@ -17,7 +17,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // home: AnonSignInPage(),
       // home: EmailSignInPage(),
-      home: GoogleSignInPage(),
+      // home: GoogleSignInPage(),
+      home: PhoneSignInPage(),
     );
   }
 }

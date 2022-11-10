@@ -23,7 +23,15 @@ class PhoneSignInPage extends StatelessWidget {
 
             //* SIGN IN STATUS
             // CODE HERE: Change status based on current user
-            const Text("You haven't signed in yet"),
+            StreamBuilder<User?>(
+                stream: FirebaseAuth.instance.userChanges(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text('Sign in with ${snapshot.data?.phoneNumber}}');
+                  } else {
+                    return const Text("You haven't signed in yet");
+                  }
+                }),
             const SizedBox(height: 15),
 
             //* PHONE TEXTFIELD
@@ -50,9 +58,45 @@ class PhoneSignInPage extends StatelessWidget {
                           MaterialStateProperty.all(Colors.green.shade900)),
                   onPressed: () async {
                     // CODE HERE: Sign in with phone credential / Sign out from firebase
+                    if (FirebaseAuth.instance.currentUser == null) {
+                      await FirebaseAuth.instance.verifyPhoneNumber(
+                          phoneNumber: '+${phoneController.text}',
+                          verificationCompleted: (credential) async {
+                            await FirebaseAuth.instance
+                                .signInWithCredential(credential);
+                          },
+                          verificationFailed: (exception) {
+                            showNotification(
+                                context, exception.message.toString());
+                          },
+                          codeSent: ((verificationId, resendCode) async {
+                            String? smsCode = await askingSMSCode(context);
+                            if (smsCode != null) {
+                              PhoneAuthCredential credential =
+                                  PhoneAuthProvider.credential(
+                                      verificationId: verificationId,
+                                      smsCode: smsCode);
+                              try {
+                                FirebaseAuth.instance
+                                    .signInWithCredential(credential);
+                              } on FirebaseAuthException catch (e) {
+                                log(e.message.toString());
+                              }
+                            }
+                          }),
+                          codeAutoRetrievalTimeout: (verificationId) {});
+                    }
                   },
                   // CODE HERE: Change button text based on current user
-                  child: const Text("Sign In")),
+                  child: StreamBuilder<User?>(
+                      stream: null,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return const Text('Sign out');
+                        } else {
+                          return const Text("Sign In");
+                        }
+                      })),
             )
           ],
         ),
